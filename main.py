@@ -10,11 +10,14 @@ def start(update,context):
 def photo_handler(update,context):
 
     photo = update.message.photo[-1]
-    inline_dislike = InlineKeyboardButton(text="👎️️️️️️",callback_data=1)
-    inline_like = InlineKeyboardButton(text="👍️️️️️️",callback_data=1)
+    inline_dislike = InlineKeyboardButton(text="👎️️️️️️",callback_data='dislike')
+    inline_like = InlineKeyboardButton(text="👍️️️️️️",callback_data='like')
     reply_markup = InlineKeyboardMarkup([[inline_dislike,inline_like]])
-    update.message.reply_photo(photo.file_id,reply_markup=reply_markup)
-    
+    update.message.reply_photo(photo.file_id, caption="Do you like this photo?", reply_markup=reply_markup)
+
+
+def queryHandler(update,contex):
+    query = update.callback_query
 
 token = os.getenv('TOKEN')
 
